@@ -28,20 +28,101 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.PackageListBox = new System.Windows.Forms.ListBox();
+            this.DeviceButton = new System.Windows.Forms.Button();
+            this.CurrentDeviceLabel = new System.Windows.Forms.Label();
+            this.DownloadButton = new System.Windows.Forms.Button();
+            this.CancelButton = new System.Windows.Forms.Button();
+            this.DownloadProgressLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
+            // 
+            // PackageListBox
+            // 
+            this.PackageListBox.FormattingEnabled = true;
+            this.PackageListBox.Location = new System.Drawing.Point(12, 63);
+            this.PackageListBox.Name = "PackageListBox";
+            this.PackageListBox.Size = new System.Drawing.Size(460, 342);
+            this.PackageListBox.TabIndex = 0;
+            // 
+            // DeviceButton
+            // 
+            this.DeviceButton.Location = new System.Drawing.Point(12, 12);
+            this.DeviceButton.Name = "DeviceButton";
+            this.DeviceButton.Size = new System.Drawing.Size(70, 38);
+            this.DeviceButton.TabIndex = 1;
+            this.DeviceButton.Text = "Devices";
+            this.DeviceButton.UseVisualStyleBackColor = true;
+            // 
+            // CurrentDeviceLabel
+            // 
+            this.CurrentDeviceLabel.AutoSize = true;
+            this.CurrentDeviceLabel.BackColor = System.Drawing.Color.White;
+            this.CurrentDeviceLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CurrentDeviceLabel.Location = new System.Drawing.Point(98, 12);
+            this.CurrentDeviceLabel.MinimumSize = new System.Drawing.Size(370, 40);
+            this.CurrentDeviceLabel.Name = "CurrentDeviceLabel";
+            this.CurrentDeviceLabel.Size = new System.Drawing.Size(370, 40);
+            this.CurrentDeviceLabel.TabIndex = 2;
+            this.CurrentDeviceLabel.Text = "No Device Selected";
+            this.CurrentDeviceLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // DownloadButton
+            // 
+            this.DownloadButton.Location = new System.Drawing.Point(12, 419);
+            this.DownloadButton.Name = "DownloadButton";
+            this.DownloadButton.Size = new System.Drawing.Size(70, 30);
+            this.DownloadButton.TabIndex = 3;
+            this.DownloadButton.Text = "Download";
+            this.DownloadButton.UseVisualStyleBackColor = true;
+            // 
+            // CancelButton
+            // 
+            this.CancelButton.Location = new System.Drawing.Point(88, 419);
+            this.CancelButton.Name = "CancelButton";
+            this.CancelButton.Size = new System.Drawing.Size(70, 30);
+            this.CancelButton.TabIndex = 4;
+            this.CancelButton.Text = "Cancel";
+            this.CancelButton.UseVisualStyleBackColor = true;
+            // 
+            // DownloadProgressLabel
+            // 
+            this.DownloadProgressLabel.AutoSize = true;
+            this.DownloadProgressLabel.BackColor = System.Drawing.Color.White;
+            this.DownloadProgressLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DownloadProgressLabel.Location = new System.Drawing.Point(175, 420);
+            this.DownloadProgressLabel.MinimumSize = new System.Drawing.Size(294, 25);
+            this.DownloadProgressLabel.Name = "DownloadProgressLabel";
+            this.DownloadProgressLabel.Size = new System.Drawing.Size(294, 25);
+            this.DownloadProgressLabel.TabIndex = 5;
+            this.DownloadProgressLabel.Text = "No Download In Progress";
+            this.DownloadProgressLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.ClientSize = new System.Drawing.Size(484, 461);
+            this.Controls.Add(this.DownloadProgressLabel);
+            this.Controls.Add(this.CancelButton);
+            this.Controls.Add(this.DownloadButton);
+            this.Controls.Add(this.CurrentDeviceLabel);
+            this.Controls.Add(this.DeviceButton);
+            this.Controls.Add(this.PackageListBox);
             this.Name = "Form1";
             this.Text = "APK Extractor";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
+
+        private System.Windows.Forms.ListBox PackageListBox;
+        private System.Windows.Forms.Button DeviceButton;
+        private System.Windows.Forms.Label CurrentDeviceLabel;
+        private System.Windows.Forms.Button DownloadButton;
+        private System.Windows.Forms.Button CancelButton;
+        private System.Windows.Forms.Label DownloadProgressLabel;
     }
 }
 
