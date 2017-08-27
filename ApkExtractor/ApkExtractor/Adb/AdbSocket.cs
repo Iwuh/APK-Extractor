@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ApkExtractor.Adb
 {
-    class AdbSocket : IDisposable
+    public class AdbSocket : IDisposable
     {
         private TcpClient _socket;
         private readonly Encoding _ascii;

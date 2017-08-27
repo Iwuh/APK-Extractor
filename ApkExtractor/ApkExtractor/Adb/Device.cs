@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ApkExtractor.Adb
 {
-    struct Device
+    public class Device
     {
         /// <summary>
         /// The device's serial number.
@@ -28,6 +28,12 @@ namespace ApkExtractor.Adb
         /// The device's name.
         /// </summary>
         public string Name { get; private set; }
+
+        /// <summary>
+        /// Gets the string representation of this device.
+        /// </summary>
+        public override string ToString() => $"{Serial} ({Status})\n{Product} {Model} {Name}";
+
 
         /// <summary>
         /// Creates an instance of <see cref="Device"/> from an ADB device info string.

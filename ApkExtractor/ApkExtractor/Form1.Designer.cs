@@ -32,8 +32,9 @@
             this.DeviceButton = new System.Windows.Forms.Button();
             this.CurrentDeviceLabel = new System.Windows.Forms.Label();
             this.DownloadButton = new System.Windows.Forms.Button();
-            this.CancelButton = new System.Windows.Forms.Button();
+            this.CancelDownloadButton = new System.Windows.Forms.Button();
             this.DownloadProgressLabel = new System.Windows.Forms.Label();
+            this.SettingsButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // PackageListBox
@@ -57,11 +58,11 @@
             // 
             this.CurrentDeviceLabel.AutoSize = true;
             this.CurrentDeviceLabel.BackColor = System.Drawing.Color.White;
-            this.CurrentDeviceLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CurrentDeviceLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CurrentDeviceLabel.Location = new System.Drawing.Point(98, 12);
-            this.CurrentDeviceLabel.MinimumSize = new System.Drawing.Size(370, 40);
+            this.CurrentDeviceLabel.MinimumSize = new System.Drawing.Size(310, 40);
             this.CurrentDeviceLabel.Name = "CurrentDeviceLabel";
-            this.CurrentDeviceLabel.Size = new System.Drawing.Size(370, 40);
+            this.CurrentDeviceLabel.Size = new System.Drawing.Size(310, 40);
             this.CurrentDeviceLabel.TabIndex = 2;
             this.CurrentDeviceLabel.Text = "No Device Selected";
             this.CurrentDeviceLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -75,14 +76,14 @@
             this.DownloadButton.Text = "Download";
             this.DownloadButton.UseVisualStyleBackColor = true;
             // 
-            // CancelButton
+            // CancelDownloadButton
             // 
-            this.CancelButton.Location = new System.Drawing.Point(88, 419);
-            this.CancelButton.Name = "CancelButton";
-            this.CancelButton.Size = new System.Drawing.Size(70, 30);
-            this.CancelButton.TabIndex = 4;
-            this.CancelButton.Text = "Cancel";
-            this.CancelButton.UseVisualStyleBackColor = true;
+            this.CancelDownloadButton.Location = new System.Drawing.Point(88, 419);
+            this.CancelDownloadButton.Name = "CancelDownloadButton";
+            this.CancelDownloadButton.Size = new System.Drawing.Size(70, 30);
+            this.CancelDownloadButton.TabIndex = 4;
+            this.CancelDownloadButton.Text = "Cancel";
+            this.CancelDownloadButton.UseVisualStyleBackColor = true;
             // 
             // DownloadProgressLabel
             // 
@@ -97,13 +98,23 @@
             this.DownloadProgressLabel.Text = "No Download In Progress";
             this.DownloadProgressLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // SettingsButton
+            // 
+            this.SettingsButton.Location = new System.Drawing.Point(414, 12);
+            this.SettingsButton.Name = "SettingsButton";
+            this.SettingsButton.Size = new System.Drawing.Size(58, 38);
+            this.SettingsButton.TabIndex = 6;
+            this.SettingsButton.Text = "Settings";
+            this.SettingsButton.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(484, 461);
+            this.Controls.Add(this.SettingsButton);
             this.Controls.Add(this.DownloadProgressLabel);
-            this.Controls.Add(this.CancelButton);
+            this.Controls.Add(this.CancelDownloadButton);
             this.Controls.Add(this.DownloadButton);
             this.Controls.Add(this.CurrentDeviceLabel);
             this.Controls.Add(this.DeviceButton);
@@ -121,8 +132,9 @@
         private System.Windows.Forms.Button DeviceButton;
         private System.Windows.Forms.Label CurrentDeviceLabel;
         private System.Windows.Forms.Button DownloadButton;
-        private System.Windows.Forms.Button CancelButton;
+        private System.Windows.Forms.Button CancelDownloadButton;
         private System.Windows.Forms.Label DownloadProgressLabel;
+        private System.Windows.Forms.Button SettingsButton;
     }
 }
 

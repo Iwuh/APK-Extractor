@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ApkExtractor.Adb
 {
-    class AdbSyncService : IDisposable
+    public class AdbSyncService : IDisposable
     {
         private AdbSocket _socket;
         private Encoding _ascii;

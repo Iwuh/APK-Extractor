@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ApkExtractor.Adb
 {
-    class AdbClient
+    public class AdbClient
     {
         /// <summary>
         /// Starts the ADB server if it's not already running.

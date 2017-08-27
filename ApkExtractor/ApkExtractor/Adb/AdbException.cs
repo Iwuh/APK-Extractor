@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ApkExtractor.Adb
 {
-    class AdbException : Exception
+    public class AdbException : Exception
     {
         public AdbException() { }
         public AdbException(string message) : base(message) { }
