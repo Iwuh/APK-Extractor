@@ -26,6 +26,7 @@ namespace ApkExtractor
         /// </summary>
         public Device SelectedDevice { get; private set; }
 
+        // Create the device list when the form loads.
         private async void SelectDeviceForm_Load(object sender, EventArgs e) => await ShowDevices();
 
         /// <summary>
@@ -52,11 +53,30 @@ namespace ApkExtractor
             DeviceListBox.ClearSelected();
         }
 
+        // Refreshes the device list.
         private async void RefreshButton_Click(object sender, EventArgs e) => await ShowDevices();
 
+        // Set the selected device and close the form.
         private void ConfirmDeviceButton_Click(object sender, EventArgs e)
         {
             SelectedDevice = (Device)DeviceListBox.SelectedItem;
+            Close();
+        }
+
+        // Manually set the size when drawing a new item.
+        private void DeviceListBox_MeasureItem(object sender, MeasureItemEventArgs e)
+        {
+            e.ItemHeight = 30;
+        }
+
+        // Because we set the height, we have to draw the item as well.
+        private void DeviceListBox_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            if (e.Index > -1)
+            {
+                e.DrawBackground();
+                e.Graphics.DrawString(DeviceListBox.Items[e.Index].ToString(), e.Font, new SolidBrush(e.ForeColor), e.Bounds);
+            }
         }
     }
 }

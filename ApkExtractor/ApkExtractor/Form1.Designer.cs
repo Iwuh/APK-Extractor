@@ -53,6 +53,7 @@
             this.DeviceButton.TabIndex = 1;
             this.DeviceButton.Text = "Devices";
             this.DeviceButton.UseVisualStyleBackColor = true;
+            this.DeviceButton.Click += new System.EventHandler(this.DeviceButton_Click);
             // 
             // CurrentDeviceLabel
             // 

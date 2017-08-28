@@ -35,11 +35,15 @@
             // 
             // DeviceListBox
             // 
+            this.DeviceListBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.DeviceListBox.FormattingEnabled = true;
+            this.DeviceListBox.ItemHeight = 20;
             this.DeviceListBox.Location = new System.Drawing.Point(12, 12);
             this.DeviceListBox.Name = "DeviceListBox";
             this.DeviceListBox.Size = new System.Drawing.Size(260, 212);
             this.DeviceListBox.TabIndex = 0;
+            this.DeviceListBox.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.DeviceListBox_DrawItem);
+            this.DeviceListBox.MeasureItem += new System.Windows.Forms.MeasureItemEventHandler(this.DeviceListBox_MeasureItem);
             // 
             // ConfirmDeviceButton
             // 

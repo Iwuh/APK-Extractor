@@ -120,7 +120,7 @@ namespace ApkExtractor.Adb
 
                 // Read from the stream into the buffer.
                 var buffer = new byte[amountToRead];
-                readOnCurrentPass = await _socket.GetStream().ReadAsync(buffer, 0, readOnCurrentPass);
+                readOnCurrentPass = await _socket.GetStream().ReadAsync(buffer, 0, amountToRead);
 
                 // Copy the buffer into the output byte array.
                 Array.Copy(buffer, 0, bytes, totalRead, readOnCurrentPass);
