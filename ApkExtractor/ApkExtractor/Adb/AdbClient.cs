@@ -19,7 +19,7 @@ namespace ApkExtractor.Adb
         {
             if (!File.Exists(adbPath) || !string.Equals(Path.GetFileName(adbPath), "adb.exe", StringComparison.OrdinalIgnoreCase))
             {
-                throw new ArgumentException($"The file ${adbPath} does not exist or is not a valid ADB executable.");
+                throw new ArgumentException($"The file {adbPath} does not exist or is not a valid ADB executable.");
             }
 
             var psi = new ProcessStartInfo(adbPath, "start-server")

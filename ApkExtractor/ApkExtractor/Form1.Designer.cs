@@ -123,6 +123,7 @@
             this.Controls.Add(this.PackageListBox);
             this.Name = "Form1";
             this.Text = "APK Extractor";
+            this.Shown += new System.EventHandler(this.Form1_Shown);
             this.ResumeLayout(false);
             this.PerformLayout();
 

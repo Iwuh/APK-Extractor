@@ -25,7 +25,6 @@ namespace ApkExtractor
             _client = new AdbClient();
 
             _settings = new SettingsManager();
-            _serverRunning = TryStartServer();
         }
 
         /// <summary>
@@ -38,7 +37,7 @@ namespace ApkExtractor
             if (_serverRunning) return true;
 
             // If a path is already set, attempt to start the server using it.
-            if (_settings.TryGetPath(out string path) && File.Exists(path))
+            if (_settings.TryGetPath(out string path))
             {
                 try
                 {
@@ -73,20 +72,30 @@ namespace ApkExtractor
             using (var form = new SelectDeviceForm(_client))
             {
                 form.ShowDialog();
-                var device = form.SelectedDevice;
-                CurrentDeviceLabel.Text = device.ToString();
+                _currentDevice = form.SelectedDevice;
+                if (_currentDevice != null)
+                {
+                    CurrentDeviceLabel.Text = _currentDevice.ToString();
+                }
             }
         }
 
         private void SettingsButton_Click(object sender, EventArgs e)
         {
-            // If the server isn't running and the server start fails, return.
-            if (!_serverRunning && !TryStartServer()) return;
-
-            using (var form = new SettingsForm())
+            using (var form = new SettingsForm(_settings))
             {
                 form.ShowDialog();
+
+                if (!_serverRunning)
+                {
+                    TryStartServer();
+                }
             }
+        }
+
+        private void Form1_Shown(object sender, EventArgs e)
+        {
+            _serverRunning = TryStartServer();
         }
     }
 }

@@ -22,6 +22,10 @@ namespace ApkExtractor
             InitializeComponent();
 
             _settings = settings;
+            if (_settings.TryGetPath(out string path))
+            {
+                AdbLocationTextBox.Text = path;
+            }
         }
 
         private void SelectFileButton_Click(object sender, EventArgs e)
@@ -32,8 +36,7 @@ namespace ApkExtractor
                 var result = dialog.ShowDialog();
                 if (result == DialogResult.OK)
                 {
-                    // Set the currently selected path and update the text box.
-                    _settings.SetPath(dialog.FileName);
+                    // Update the text box.
                     AdbLocationTextBox.Text = dialog.FileName;
                 }
             }
@@ -41,6 +44,8 @@ namespace ApkExtractor
 
         private void ConfirmSelectionButton_Click(object sender, EventArgs e)
         {
+            // Save the selected path.
+            _settings.SetPath(AdbLocationTextBox.Text);
             Close();
         }
     }
