@@ -48,9 +48,9 @@
             // 
             // RefreshDeviceButton
             // 
-            this.RefreshDeviceButton.Location = new System.Drawing.Point(12, 12);
+            this.RefreshDeviceButton.Location = new System.Drawing.Point(12, 7);
             this.RefreshDeviceButton.Name = "RefreshDeviceButton";
-            this.RefreshDeviceButton.Size = new System.Drawing.Size(70, 38);
+            this.RefreshDeviceButton.Size = new System.Drawing.Size(105, 23);
             this.RefreshDeviceButton.TabIndex = 1;
             this.RefreshDeviceButton.Text = "Refresh devices";
             this.RefreshDeviceButton.UseVisualStyleBackColor = true;
@@ -89,9 +89,9 @@
             // 
             // SettingsButton
             // 
-            this.SettingsButton.Location = new System.Drawing.Point(414, 12);
+            this.SettingsButton.Location = new System.Drawing.Point(234, 7);
             this.SettingsButton.Name = "SettingsButton";
-            this.SettingsButton.Size = new System.Drawing.Size(58, 38);
+            this.SettingsButton.Size = new System.Drawing.Size(58, 23);
             this.SettingsButton.TabIndex = 6;
             this.SettingsButton.Text = "Settings";
             this.SettingsButton.UseVisualStyleBackColor = true;
@@ -101,16 +101,16 @@
             // 
             this.DeviceComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.DeviceComboBox.FormattingEnabled = true;
-            this.DeviceComboBox.Location = new System.Drawing.Point(164, 12);
+            this.DeviceComboBox.Location = new System.Drawing.Point(12, 36);
             this.DeviceComboBox.Name = "DeviceComboBox";
-            this.DeviceComboBox.Size = new System.Drawing.Size(244, 21);
+            this.DeviceComboBox.Size = new System.Drawing.Size(460, 21);
             this.DeviceComboBox.TabIndex = 7;
             // 
             // RefreshPackageButton
             // 
-            this.RefreshPackageButton.Location = new System.Drawing.Point(88, 12);
+            this.RefreshPackageButton.Location = new System.Drawing.Point(123, 7);
             this.RefreshPackageButton.Name = "RefreshPackageButton";
-            this.RefreshPackageButton.Size = new System.Drawing.Size(70, 38);
+            this.RefreshPackageButton.Size = new System.Drawing.Size(105, 23);
             this.RefreshPackageButton.TabIndex = 8;
             this.RefreshPackageButton.Text = "Refresh packages";
             this.RefreshPackageButton.UseVisualStyleBackColor = true;
