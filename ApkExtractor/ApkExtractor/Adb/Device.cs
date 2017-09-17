@@ -32,7 +32,7 @@ namespace ApkExtractor.Adb
         /// <summary>
         /// Gets the string representation of this device.
         /// </summary>
-        public override string ToString() => $"{Serial} ({Status}) Product:{Product} Model:{Model} Name:{Name}";
+        public override string ToString() => $"{Serial} ({Status}) {Name}";
 
 
         /// <summary>

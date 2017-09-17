@@ -24,7 +24,7 @@ namespace ApkExtractor.Adb
 
             var psi = new ProcessStartInfo(adbPath, "start-server")
             {
-                CreateNoWindow = false,
+                CreateNoWindow = true,
                 RedirectStandardError = true,
                 RedirectStandardOutput = true,
                 UseShellExecute = false
@@ -76,7 +76,7 @@ namespace ApkExtractor.Adb
 
                 // Read and verify the response.
                 var resp = await socket.ReadResponseAsync();
-                if (resp != "OKAY") throw new AdbException("An error occurred when executing the remote shell command.");
+                if (resp != "OKAY") throw new AdbException($"An error occurred when executing the remote shell command: {command}");
 
                 // The response to a shell command doesn't have a length header so we just read and return the entire thing.
                 using (var reader = new StreamReader(socket.Stream))

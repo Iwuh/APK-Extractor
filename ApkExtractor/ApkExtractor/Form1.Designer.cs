@@ -29,12 +29,13 @@
         private void InitializeComponent()
         {
             this.PackageListBox = new System.Windows.Forms.ListBox();
-            this.DeviceButton = new System.Windows.Forms.Button();
-            this.CurrentDeviceLabel = new System.Windows.Forms.Label();
+            this.RefreshDeviceButton = new System.Windows.Forms.Button();
             this.DownloadButton = new System.Windows.Forms.Button();
             this.CancelDownloadButton = new System.Windows.Forms.Button();
             this.DownloadProgressLabel = new System.Windows.Forms.Label();
             this.SettingsButton = new System.Windows.Forms.Button();
+            this.DeviceComboBox = new System.Windows.Forms.ComboBox();
+            this.RefreshPackageButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // PackageListBox
@@ -45,28 +46,15 @@
             this.PackageListBox.Size = new System.Drawing.Size(460, 342);
             this.PackageListBox.TabIndex = 0;
             // 
-            // DeviceButton
+            // RefreshDeviceButton
             // 
-            this.DeviceButton.Location = new System.Drawing.Point(12, 12);
-            this.DeviceButton.Name = "DeviceButton";
-            this.DeviceButton.Size = new System.Drawing.Size(70, 38);
-            this.DeviceButton.TabIndex = 1;
-            this.DeviceButton.Text = "Devices";
-            this.DeviceButton.UseVisualStyleBackColor = true;
-            this.DeviceButton.Click += new System.EventHandler(this.DeviceButton_Click);
-            // 
-            // CurrentDeviceLabel
-            // 
-            this.CurrentDeviceLabel.AutoSize = true;
-            this.CurrentDeviceLabel.BackColor = System.Drawing.Color.White;
-            this.CurrentDeviceLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CurrentDeviceLabel.Location = new System.Drawing.Point(98, 12);
-            this.CurrentDeviceLabel.MinimumSize = new System.Drawing.Size(310, 40);
-            this.CurrentDeviceLabel.Name = "CurrentDeviceLabel";
-            this.CurrentDeviceLabel.Size = new System.Drawing.Size(310, 40);
-            this.CurrentDeviceLabel.TabIndex = 2;
-            this.CurrentDeviceLabel.Text = "No Device Selected";
-            this.CurrentDeviceLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.RefreshDeviceButton.Location = new System.Drawing.Point(12, 12);
+            this.RefreshDeviceButton.Name = "RefreshDeviceButton";
+            this.RefreshDeviceButton.Size = new System.Drawing.Size(70, 38);
+            this.RefreshDeviceButton.TabIndex = 1;
+            this.RefreshDeviceButton.Text = "Refresh devices";
+            this.RefreshDeviceButton.UseVisualStyleBackColor = true;
+            this.RefreshDeviceButton.Click += new System.EventHandler(this.RefreshDeviceButton_Click);
             // 
             // DownloadButton
             // 
@@ -109,17 +97,37 @@
             this.SettingsButton.UseVisualStyleBackColor = true;
             this.SettingsButton.Click += new System.EventHandler(this.SettingsButton_Click);
             // 
+            // DeviceComboBox
+            // 
+            this.DeviceComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.DeviceComboBox.FormattingEnabled = true;
+            this.DeviceComboBox.Location = new System.Drawing.Point(164, 12);
+            this.DeviceComboBox.Name = "DeviceComboBox";
+            this.DeviceComboBox.Size = new System.Drawing.Size(244, 21);
+            this.DeviceComboBox.TabIndex = 7;
+            // 
+            // RefreshPackageButton
+            // 
+            this.RefreshPackageButton.Location = new System.Drawing.Point(88, 12);
+            this.RefreshPackageButton.Name = "RefreshPackageButton";
+            this.RefreshPackageButton.Size = new System.Drawing.Size(70, 38);
+            this.RefreshPackageButton.TabIndex = 8;
+            this.RefreshPackageButton.Text = "Refresh packages";
+            this.RefreshPackageButton.UseVisualStyleBackColor = true;
+            this.RefreshPackageButton.Click += new System.EventHandler(this.RefreshPackageButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(484, 461);
+            this.Controls.Add(this.RefreshPackageButton);
+            this.Controls.Add(this.DeviceComboBox);
             this.Controls.Add(this.SettingsButton);
             this.Controls.Add(this.DownloadProgressLabel);
             this.Controls.Add(this.CancelDownloadButton);
             this.Controls.Add(this.DownloadButton);
-            this.Controls.Add(this.CurrentDeviceLabel);
-            this.Controls.Add(this.DeviceButton);
+            this.Controls.Add(this.RefreshDeviceButton);
             this.Controls.Add(this.PackageListBox);
             this.Name = "Form1";
             this.Text = "APK Extractor";
@@ -132,12 +140,13 @@
         #endregion
 
         private System.Windows.Forms.ListBox PackageListBox;
-        private System.Windows.Forms.Button DeviceButton;
-        private System.Windows.Forms.Label CurrentDeviceLabel;
+        private System.Windows.Forms.Button RefreshDeviceButton;
         private System.Windows.Forms.Button DownloadButton;
         private System.Windows.Forms.Button CancelDownloadButton;
         private System.Windows.Forms.Label DownloadProgressLabel;
         private System.Windows.Forms.Button SettingsButton;
+        private System.Windows.Forms.ComboBox DeviceComboBox;
+        private System.Windows.Forms.Button RefreshPackageButton;
     }
 }
 

@@ -17,7 +17,6 @@ namespace ApkExtractor
         private AdbClient _client;
         private SettingsManager _settings;
         private bool _serverRunning;
-        private Device _currentDevice;
 
         public Form1()
         {
@@ -64,19 +63,32 @@ namespace ApkExtractor
             return false;
         }
 
-        private void DeviceButton_Click(object sender, EventArgs e)
+        private async void RefreshDeviceButton_Click(object sender, EventArgs e)
         {
             // If the server isn't running and the server start fails, return.
             if (!_serverRunning && !TryStartServer()) return;
 
-            using (var form = new SelectDeviceForm(_client))
+            try
             {
-                form.ShowDialog();
-                _currentDevice = form.SelectedDevice;
-                if (_currentDevice != null)
+                // Get a list of all devices currently connected.
+                var devices = await _client.GetDevicesAsync();
+
+                // Pause drawing to the ComboBox while we add items.
+                DeviceComboBox.BeginUpdate();
+                DeviceComboBox.Items.Clear();
+                foreach (Device d in devices)
                 {
-                    CurrentDeviceLabel.Text = _currentDevice.ToString();
+                    DeviceComboBox.Items.Add(d);
                 }
+                // Resume drawing.
+                DeviceComboBox.EndUpdate();
+            }
+            catch (AdbException ex)
+            {
+                MessageBox.Show(ex.Message,
+                                "ADB Error",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
             }
         }
 
@@ -96,6 +108,51 @@ namespace ApkExtractor
         private void Form1_Shown(object sender, EventArgs e)
         {
             _serverRunning = TryStartServer();
+        }
+
+        private async void RefreshPackageButton_Click(object sender, EventArgs e)
+        {
+            const string prefix = "package:";
+
+            // If the server isn't running and the server start fails, return.
+            if (!_serverRunning && !TryStartServer()) return;
+
+            if (DeviceComboBox.SelectedItem == null)
+            {
+                MessageBox.Show("A device must be selected before the package list can be retrieved.",
+                                "No Device",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+
+                return;
+            }
+
+            try
+            {
+                // Get a list of all packages in a single string.
+                string response = await _client.ExecuteShellCommandAsync(DeviceComboBox.SelectedItem as Device, "pm list packages");
+                // Split the string into several lines.
+                var split = response.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                // Remove the package: prefix from each line.
+                var packages = split.Select(s => s.Substring(prefix.Length));
+
+                // Pause drawing of the list box while items are added.
+                PackageListBox.BeginUpdate();
+                PackageListBox.Items.Clear();
+                foreach (string package in packages)
+                {
+                    PackageListBox.Items.Add(package);
+                }
+                // Resume drawing of the list box.
+                PackageListBox.EndUpdate();
+            }
+            catch (AdbException ex)
+            {
+                MessageBox.Show(ex.Message,
+                                "ADB Error",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
+            }
         }
     }
 }
