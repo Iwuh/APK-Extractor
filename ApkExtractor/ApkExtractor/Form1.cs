@@ -18,8 +18,8 @@ namespace ApkExtractor
         private AdbClient _client;
         private SettingsManager _settings;
         private bool _serverRunning;
-        private bool _downloadInProgress;
-        private CancellationTokenSource _downloadCancel;
+        private bool _transferInProgress;
+        private CancellationTokenSource _transferCancel;
 
         public Form1()
         {
@@ -66,7 +66,7 @@ namespace ApkExtractor
             return false;
         }
 
-        private void UpdateDownloadProgress(int downloaded, int total) => DownloadProgressLabel.Text = $"Downloading: {downloaded} bytes / {total} bytes";
+        private void UpdateTransferProgress(int transfered, int total) => TransferProgressLabel.Text = $"Transfering: {transfered} bytes / {total} bytes";
 
         private async void RefreshDeviceButton_Click(object sender, EventArgs e)
         {
@@ -160,19 +160,19 @@ namespace ApkExtractor
             }
         }
 
-        private async void DownloadButton_Click(object sender, EventArgs e)
+        private async void TransferButton_Click(object sender, EventArgs e)
         {
             // If the server isn't running and the server start fails, return.
             if (!_serverRunning && !TryStartServer()) return;
-            // If a download is already in progress, return.
-            if (_downloadInProgress) return;
+            // If a transfer is already in progress, return.
+            if (_transferInProgress) return;
             // If no package is selected, return.
             if (PackageListBox.SelectedItem == null) return;
             // If no device is selected, return.
             if (DeviceComboBox.SelectedItem == null) return;
 
-            // Create a new CancellationTokenSource for the current download operation.
-            _downloadCancel = new CancellationTokenSource();
+            // Create a new CancellationTokenSource for the current transfer operation.
+            _transferCancel = new CancellationTokenSource();
 
             try
             {
@@ -194,26 +194,26 @@ namespace ApkExtractor
                     // Remove the CRLF and package: prefix.
                     var formattedPath = path.TrimEnd('\r', '\n').Substring("package:".Length);
 
-                    // Download the file to our MemoryStream.
+                    // Transfer the file to our MemoryStream.
                     await sync.BeginSyncAsync(DeviceComboBox.SelectedItem as Device);
-                    _downloadInProgress = true;
-                    await sync.PullFileAsync(formattedPath, output, _downloadCancel.Token, UpdateDownloadProgress);
+                    _transferInProgress = true;
+                    await sync.PullFileAsync(formattedPath, output, _transferCancel.Token, UpdateTransferProgress);
 
-                    // If the download completed without being cancelled, write it to the file.
+                    // If the transfer completed without being cancelled, write it to the file.
                     using (var file = dialog.OpenFile())
                     {
                         output.Position = 0;
                         output.CopyTo(file);
                     }
 
-                    DownloadProgressLabel.Text = "Download Complete";
-                    _downloadInProgress = false;
+                    TransferProgressLabel.Text = "Transfer Complete";
+                    _transferInProgress = false;
                 }
             }
             catch (OperationCanceledException)
             {
-                // Thrown if the download operation is cancelled, i.e. the user clicks the Cancel button while a download is in progress.
-                DownloadProgressLabel.Text = "Download Cancelled";
+                // Thrown if the transfer operation is cancelled, i.e. the user clicks the Cancel button while a transfer is in progress.
+                TransferProgressLabel.Text = "Transfer Cancelled";
             }
             catch (AdbException ex)
             {
@@ -225,16 +225,16 @@ namespace ApkExtractor
             finally
             {
                 // Dispose of the CancellationTokenSource.
-                _downloadCancel.Dispose();
-                _downloadCancel = null;
+                _transferCancel.Dispose();
+                _transferCancel = null;
             }
         }
 
-        private void CancelDownloadButton_Click(object sender, EventArgs e)
+        private void CancelTransferButton_Click(object sender, EventArgs e)
         {
-            if (_downloadCancel != null)
+            if (_transferCancel != null)
             {
-                _downloadCancel.Cancel();
+                _transferCancel.Cancel();
             }
         }
     }

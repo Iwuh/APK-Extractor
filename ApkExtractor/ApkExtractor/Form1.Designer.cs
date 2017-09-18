@@ -30,9 +30,9 @@
         {
             this.PackageListBox = new System.Windows.Forms.ListBox();
             this.RefreshDeviceButton = new System.Windows.Forms.Button();
-            this.DownloadButton = new System.Windows.Forms.Button();
-            this.CancelDownloadButton = new System.Windows.Forms.Button();
-            this.DownloadProgressLabel = new System.Windows.Forms.Label();
+            this.TransferButton = new System.Windows.Forms.Button();
+            this.CancelTransferButton = new System.Windows.Forms.Button();
+            this.TransferProgressLabel = new System.Windows.Forms.Label();
             this.SettingsButton = new System.Windows.Forms.Button();
             this.DeviceComboBox = new System.Windows.Forms.ComboBox();
             this.RefreshPackageButton = new System.Windows.Forms.Button();
@@ -56,38 +56,38 @@
             this.RefreshDeviceButton.UseVisualStyleBackColor = true;
             this.RefreshDeviceButton.Click += new System.EventHandler(this.RefreshDeviceButton_Click);
             // 
-            // DownloadButton
+            // TransferButton
             // 
-            this.DownloadButton.Location = new System.Drawing.Point(12, 419);
-            this.DownloadButton.Name = "DownloadButton";
-            this.DownloadButton.Size = new System.Drawing.Size(70, 30);
-            this.DownloadButton.TabIndex = 3;
-            this.DownloadButton.Text = "Download";
-            this.DownloadButton.UseVisualStyleBackColor = true;
-            this.DownloadButton.Click += new System.EventHandler(this.DownloadButton_Click);
+            this.TransferButton.Location = new System.Drawing.Point(12, 419);
+            this.TransferButton.Name = "TransferButton";
+            this.TransferButton.Size = new System.Drawing.Size(70, 30);
+            this.TransferButton.TabIndex = 3;
+            this.TransferButton.Text = "Transfer";
+            this.TransferButton.UseVisualStyleBackColor = true;
+            this.TransferButton.Click += new System.EventHandler(this.TransferButton_Click);
             // 
-            // CancelDownloadButton
+            // CancelTransferButton
             // 
-            this.CancelDownloadButton.Location = new System.Drawing.Point(88, 419);
-            this.CancelDownloadButton.Name = "CancelDownloadButton";
-            this.CancelDownloadButton.Size = new System.Drawing.Size(70, 30);
-            this.CancelDownloadButton.TabIndex = 4;
-            this.CancelDownloadButton.Text = "Cancel";
-            this.CancelDownloadButton.UseVisualStyleBackColor = true;
-            this.CancelDownloadButton.Click += new System.EventHandler(this.CancelDownloadButton_Click);
+            this.CancelTransferButton.Location = new System.Drawing.Point(88, 419);
+            this.CancelTransferButton.Name = "CancelTransferButton";
+            this.CancelTransferButton.Size = new System.Drawing.Size(70, 30);
+            this.CancelTransferButton.TabIndex = 4;
+            this.CancelTransferButton.Text = "Cancel";
+            this.CancelTransferButton.UseVisualStyleBackColor = true;
+            this.CancelTransferButton.Click += new System.EventHandler(this.CancelTransferButton_Click);
             // 
-            // DownloadProgressLabel
+            // TransferProgressLabel
             // 
-            this.DownloadProgressLabel.AutoSize = true;
-            this.DownloadProgressLabel.BackColor = System.Drawing.Color.White;
-            this.DownloadProgressLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DownloadProgressLabel.Location = new System.Drawing.Point(175, 420);
-            this.DownloadProgressLabel.MinimumSize = new System.Drawing.Size(294, 25);
-            this.DownloadProgressLabel.Name = "DownloadProgressLabel";
-            this.DownloadProgressLabel.Size = new System.Drawing.Size(294, 25);
-            this.DownloadProgressLabel.TabIndex = 5;
-            this.DownloadProgressLabel.Text = "No Download In Progress";
-            this.DownloadProgressLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.TransferProgressLabel.AutoSize = true;
+            this.TransferProgressLabel.BackColor = System.Drawing.Color.White;
+            this.TransferProgressLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TransferProgressLabel.Location = new System.Drawing.Point(175, 420);
+            this.TransferProgressLabel.MinimumSize = new System.Drawing.Size(294, 25);
+            this.TransferProgressLabel.Name = "TransferProgressLabel";
+            this.TransferProgressLabel.Size = new System.Drawing.Size(294, 25);
+            this.TransferProgressLabel.TabIndex = 5;
+            this.TransferProgressLabel.Text = "No Transfer In Progress";
+            this.TransferProgressLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // SettingsButton
             // 
@@ -126,9 +126,9 @@
             this.Controls.Add(this.RefreshPackageButton);
             this.Controls.Add(this.DeviceComboBox);
             this.Controls.Add(this.SettingsButton);
-            this.Controls.Add(this.DownloadProgressLabel);
-            this.Controls.Add(this.CancelDownloadButton);
-            this.Controls.Add(this.DownloadButton);
+            this.Controls.Add(this.TransferProgressLabel);
+            this.Controls.Add(this.CancelTransferButton);
+            this.Controls.Add(this.TransferButton);
             this.Controls.Add(this.RefreshDeviceButton);
             this.Controls.Add(this.PackageListBox);
             this.Name = "Form1";
@@ -143,9 +143,9 @@
 
         private System.Windows.Forms.ListBox PackageListBox;
         private System.Windows.Forms.Button RefreshDeviceButton;
-        private System.Windows.Forms.Button DownloadButton;
-        private System.Windows.Forms.Button CancelDownloadButton;
-        private System.Windows.Forms.Label DownloadProgressLabel;
+        private System.Windows.Forms.Button TransferButton;
+        private System.Windows.Forms.Button CancelTransferButton;
+        private System.Windows.Forms.Label TransferProgressLabel;
         private System.Windows.Forms.Button SettingsButton;
         private System.Windows.Forms.ComboBox DeviceComboBox;
         private System.Windows.Forms.Button RefreshPackageButton;

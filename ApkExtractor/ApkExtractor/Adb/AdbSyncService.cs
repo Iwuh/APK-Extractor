@@ -67,10 +67,10 @@ namespace ApkExtractor.Adb
         /// <param name="absolutePath">The absolute path of the file to pull.</param>
         /// <param name="output">A <see cref="Stream"/> that the file contents should be written to.</param>
         /// <param name="cancel">A <see cref="CancellationToken"/> that can be used to cancel the operation.</param>
-        /// <param name="downloadProgress">A function that takes the current amount of downloaded bytes and the total amount of bytes to download.</param>
-        public async Task PullFileAsync(string absolutePath, Stream output, CancellationToken cancel, Action<int, int> downloadProgress)
+        /// <param name="transferProgress">A function that takes the current amount of transfered bytes and the total amount of bytes to transfer.</param>
+        public async Task PullFileAsync(string absolutePath, Stream output, CancellationToken cancel, Action<int, int> transferProgress)
         {
-            // Get the file size, used for displaying download progress.
+            // Get the file size, used for displaying transfer progress.
             int fileSize = await GetFileSizeAsync(absolutePath);
 
             // Tell the server that we want to recieve a file.
@@ -103,7 +103,7 @@ namespace ApkExtractor.Adb
                 output.Write(data, 0, bytesRead);
 
                 // Pass the number of bytes read so far and the total number of bytes to read to an updater function.
-                downloadProgress(totalBytesRead, fileSize);
+                transferProgress(totalBytesRead, fileSize);
 
                 // Read the response for the next loop.
                 resp = await _socket.ReadResponseAsync();
