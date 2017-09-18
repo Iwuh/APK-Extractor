@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsForm));
             this.AdbLocationTextBox = new System.Windows.Forms.TextBox();
             this.SelectFileButton = new System.Windows.Forms.Button();
             this.ConfirmSelectionButton = new System.Windows.Forms.Button();
@@ -69,8 +70,11 @@
             this.Controls.Add(this.ConfirmSelectionButton);
             this.Controls.Add(this.SelectFileButton);
             this.Controls.Add(this.AdbLocationTextBox);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "SettingsForm";
-            this.Text = "SettingsForm";
+            this.Text = "Settings";
             this.ResumeLayout(false);
             this.PerformLayout();
 

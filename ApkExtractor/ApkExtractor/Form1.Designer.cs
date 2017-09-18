@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.PackageListBox = new System.Windows.Forms.ListBox();
             this.RefreshDeviceButton = new System.Windows.Forms.Button();
             this.TransferButton = new System.Windows.Forms.Button();
@@ -131,6 +132,7 @@
             this.Controls.Add(this.TransferButton);
             this.Controls.Add(this.RefreshDeviceButton);
             this.Controls.Add(this.PackageListBox);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "APK Extractor";
             this.Shown += new System.EventHandler(this.Form1_Shown);
