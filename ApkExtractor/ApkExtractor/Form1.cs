@@ -7,6 +7,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -17,6 +18,8 @@ namespace ApkExtractor
         private AdbClient _client;
         private SettingsManager _settings;
         private bool _serverRunning;
+        private bool _downloadInProgress;
+        private CancellationTokenSource _downloadCancel;
 
         public Form1()
         {
@@ -62,6 +65,8 @@ namespace ApkExtractor
             }
             return false;
         }
+
+        private void UpdateDownloadProgress(int downloaded, int total) => DownloadProgressLabel.Text = $"Downloading: {downloaded} bytes / {total} bytes";
 
         private async void RefreshDeviceButton_Click(object sender, EventArgs e)
         {
@@ -152,6 +157,84 @@ namespace ApkExtractor
                                 "ADB Error",
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Error);
+            }
+        }
+
+        private async void DownloadButton_Click(object sender, EventArgs e)
+        {
+            // If the server isn't running and the server start fails, return.
+            if (!_serverRunning && !TryStartServer()) return;
+            // If a download is already in progress, return.
+            if (_downloadInProgress) return;
+            // If no package is selected, return.
+            if (PackageListBox.SelectedItem == null) return;
+            // If no device is selected, return.
+            if (DeviceComboBox.SelectedItem == null) return;
+
+            // Create a new CancellationTokenSource for the current download operation.
+            _downloadCancel = new CancellationTokenSource();
+
+            try
+            {
+                // Create a SaveFileDialog to prompt the user where they want to extract the APK to.
+                // Create a MemoryStream to hold the file in memory before writing it to disk, in case the user cancels it partway.
+                // Create an AdbSyncService to retrieve the file.
+                using (var dialog = new SaveFileDialog() { Filter = "APK files (*.apk)|*.apk|All files (*.*)|*.*" })
+                using (var output = new MemoryStream())
+                using (var sync = new AdbSyncService())
+                {
+                    dialog.FileName = PackageListBox.SelectedItem as string;
+                    dialog.ShowDialog();
+
+                    // If the user doesn't select a file, return.
+                    if (dialog.FileName == string.Empty) return;
+
+                    // Get the absolute path to the apk.
+                    string path = await _client.ExecuteShellCommandAsync(DeviceComboBox.SelectedItem as Device, $"pm path {PackageListBox.SelectedItem}");
+                    // Remove the CRLF and package: prefix.
+                    var formattedPath = path.TrimEnd('\r', '\n').Substring("package:".Length);
+
+                    // Download the file to our MemoryStream.
+                    await sync.BeginSyncAsync(DeviceComboBox.SelectedItem as Device);
+                    _downloadInProgress = true;
+                    await sync.PullFileAsync(formattedPath, output, _downloadCancel.Token, UpdateDownloadProgress);
+
+                    // If the download completed without being cancelled, write it to the file.
+                    using (var file = dialog.OpenFile())
+                    {
+                        output.Position = 0;
+                        output.CopyTo(file);
+                    }
+
+                    DownloadProgressLabel.Text = "Download Complete";
+                    _downloadInProgress = false;
+                }
+            }
+            catch (OperationCanceledException)
+            {
+                // Thrown if the download operation is cancelled, i.e. the user clicks the Cancel button while a download is in progress.
+                DownloadProgressLabel.Text = "Download Cancelled";
+            }
+            catch (AdbException ex)
+            {
+                MessageBox.Show(ex.Message,
+                                "ADB Error",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
+            }
+            finally
+            {
+                // Dispose of the CancellationTokenSource.
+                _downloadCancel.Dispose();
+                _downloadCancel = null;
+            }
+        }
+
+        private void CancelDownloadButton_Click(object sender, EventArgs e)
+        {
+            if (_downloadCancel != null)
+            {
+                _downloadCancel.Cancel();
             }
         }
     }

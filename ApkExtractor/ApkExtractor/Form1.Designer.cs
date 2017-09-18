@@ -64,6 +64,7 @@
             this.DownloadButton.TabIndex = 3;
             this.DownloadButton.Text = "Download";
             this.DownloadButton.UseVisualStyleBackColor = true;
+            this.DownloadButton.Click += new System.EventHandler(this.DownloadButton_Click);
             // 
             // CancelDownloadButton
             // 
@@ -73,12 +74,13 @@
             this.CancelDownloadButton.TabIndex = 4;
             this.CancelDownloadButton.Text = "Cancel";
             this.CancelDownloadButton.UseVisualStyleBackColor = true;
+            this.CancelDownloadButton.Click += new System.EventHandler(this.CancelDownloadButton_Click);
             // 
             // DownloadProgressLabel
             // 
             this.DownloadProgressLabel.AutoSize = true;
             this.DownloadProgressLabel.BackColor = System.Drawing.Color.White;
-            this.DownloadProgressLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DownloadProgressLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DownloadProgressLabel.Location = new System.Drawing.Point(175, 420);
             this.DownloadProgressLabel.MinimumSize = new System.Drawing.Size(294, 25);
             this.DownloadProgressLabel.Name = "DownloadProgressLabel";

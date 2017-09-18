@@ -23,14 +23,13 @@ namespace ApkExtractor.Adb
         /// Begins the sync (file transfer) service on the current socket.
         /// </summary>
         /// <returns>The <see cref="AdbSyncService"/> instance.</returns>
-        public async Task<AdbSyncService> BeginSyncAsync()
+        public async Task BeginSyncAsync(Device device)
         {
+            await _socket.SetDeviceAsync(device);
             await _socket.WriteAsync(AdbClient.FormAdbRequest("sync:"));
             var resp = await _socket.ReadResponseAsync();
 
             if (resp != "OKAY") throw new AdbException("An error occurred when beginning the sync service.");
-
-            return this;
         }
 
         /// <summary>

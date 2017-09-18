@@ -153,7 +153,7 @@ namespace ApkExtractor.Adb
         /// </summary>
         /// <param name="deviceSerial">The device's serial number.</param>
         /// <returns>Whether or not the device was successfully set.</returns>
-        public async Task<bool> SetDeviceAsync(Device device)
+        public async Task SetDeviceAsync(Device device)
         {
             // Set the default device for the current socket.
             await WriteAsync(AdbClient.FormAdbRequest($"host:transport:{device.Serial}"));
@@ -163,9 +163,10 @@ namespace ApkExtractor.Adb
             {
                 // Clear the error message from the stream.
                 await ReadAdbStringAsync();
-                return false;
+
+                // Throw an exception because the operation can not continue without setting a device.
+                throw new AdbException("An error occurred when setting the device.");
             }
-            return true;
         }
 
         public void Dispose()
